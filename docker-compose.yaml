@@ -1,0 +1,48 @@
+services:
+  db:
+    container_name: desafio-postgres
+    image: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=desafio
+
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+    networks:
+      - postgres-network
+
+  pgadmin:
+    container_name: desafio-pgadmin
+    image: dpage/pgadmin4
+    ports:
+      - "15432:80"
+    volumes:
+      - ./pgadmin-data:/var/lib/pgadmin
+
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=desafio
+      - PGADMIN_DEFAULT_EMAIL=desafio@xyz.com
+      - PGADMIN_DEFAULT_PASSWORD=postgres
+
+    networks:
+      - postgres-network
+
+volumes:
+  postgres-data:
+
+networks:
+  postgres-network:
+    driver: bridge
