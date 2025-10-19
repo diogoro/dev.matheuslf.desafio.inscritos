@@ -3,12 +3,12 @@ CREATE TYPE priority_type AS ENUM ('LOW', 'MEDIUM', 'HIGH');
 
 CREATE TABLE task
 (
-  id BIGINT NOT NULL,
+  id serial NOT NULL,
   title VARCHAR(150) NOT NULL,
   description VARCHAR NOT NULL,
   status status_type NOT NULL,
   priority priority_type NOT NULL,
-  dueDate TIMESTAMP NOT NULL,
+  due_date TIMESTAMP NOT NULL,
   project_id BIGINT NOT NULL,
 
   CONSTRAINT pk_task PRIMARY KEY (id),

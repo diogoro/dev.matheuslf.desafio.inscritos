@@ -1,10 +1,10 @@
 CREATE TABLE project
 (
-  id BIGINT NOT NULL,
+  id serial NOT NULL,
   name VARCHAR(100) NOT NULL,
   description VARCHAR,
-  startDate TIMESTAMP NOT NULL,
-  endDate TIMESTAMP,
+  start_date TIMESTAMP NOT NULL,
+  end_date TIMESTAMP,
   CONSTRAINT pk_project PRIMARY KEY (id)
 );
 
